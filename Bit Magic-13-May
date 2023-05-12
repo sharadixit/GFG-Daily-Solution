@@ -1,0 +1,14 @@
+#Java solution
+
+class Solution {
+    public static int bitMagic(int n, int[] arr) {
+        int c = 0;
+        for (int i = 0; i < n / 2; i++) {
+            if (arr[i] != arr[n - 1 - i]) {
+                c++;
+            }
+        }
+        return (c + 1) / 2;
+    }
+}
+
