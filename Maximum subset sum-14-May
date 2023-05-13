@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    long long int dp[100001][2];
+    long long f(int n,vector<int>&A,bool prev){
+        if(n==0) return 0;
+        if(dp[n][prev]!=-1) return dp[n][prev];
+        long long int take=0;
+        long long int not_take=0;
+        if(prev==false){
+            take=A[n-1]+f(n-1,A,true);
+            not_take=LLONG_MIN;
+        }
+        else{
+            take=A[n-1]+f(n-1,A,true);
+            not_take=f(n-1,A,false);
+        }
+        return dp[n][prev]=max(take,not_take);
+    }
+    long long findMaxSubsetSum(int N, vector<int> &A) {
+        // code here
+        memset(dp,-1,sizeof(dp));
+        return max(f(N,A,true),f(N,A,false));
+    }
+};
