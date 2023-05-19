@@ -1,0 +1,58 @@
+class Solution{
+    public:
+    vector<int>kthSmallestNum(int n, vector<vector<int>>&range, int q, vector<int>queries){
+        
+   // sort kar lo dost.
+    sort(range.begin(), range.end()); 
+    vector<int> ans; // ye ans store karega to q size ka hoga.
+    
+    
+    for(int j = 0; j<q; j++){  // iterate over queries array. 
+        // dost maxi tumara max upper range ko hold karega.
+       // and elements each interval no. of elemets ko store karega.
+      
+        int maxi = 0, elements = 0; 
+        int i; 
+        for( i= 0; i<n; i++){  // iterate over range array.
+            
+
+       // abb sort kar ne ke bad 3 case ho sakta h. visualize it
+ //  |------------|
+//         |------------------|
+
+//             OR
+
+//    |------------|
+//         |------| 
+
+//         OR
+
+//    |--------------|
+//                                 |----------------|
+
+
+
+            if(range[i][0]< maxi){
+                if(range[i][1] > maxi){
+                    elements+= range[i][1] - maxi;
+                }
+            }else if(range[i][0]> maxi){
+                elements += range[i][1] - range[i][0] + 1; 
+            }else{
+                elements += range[i][1] - range[i][0]; 
+            } 
+            
+            maxi = max(maxi,range[i][1]); 
+            
+            
+            if(queries[j] <= elements){
+                ans.push_back(range[i][1] - (elements - queries[j])) ; 
+                break; 
+            }
+        } 
+        if(i>=n)
+            ans.push_back(-1); 
+    }
+               return ans; 
+    } 
+};
