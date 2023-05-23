@@ -1,0 +1,15 @@
+ int getMaximum(int N, vector<int> &arr) {
+        // code here
+        long long int sum=0;
+        for(auto it :arr)
+        {
+            sum+=it ;
+        }
+        for ( int i=N;i>=1;i--)
+        {
+            if(sum%i==0)
+            return i;
+        }
+        return 0;
+    }
+
