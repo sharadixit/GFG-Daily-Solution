@@ -1,0 +1,46 @@
+class Solution{
+    public:
+   Node* reverse(Node* head)
+    {
+        // Initialize current, previous and next pointers
+        Node* current = head;
+        Node *prev = NULL, *next = NULL;
+ 
+        while (current != NULL) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+        return head;
+    }
+    struct Node* modifyTheList(struct Node *head)
+    {
+        Node* slow = head;
+        Node* fast = head;
+        Node* temp = head;
+        Node* prev = NULL;
+        while(fast && fast->next){
+            prev = slow;
+            slow =  slow->next;
+            fast =  fast->next->next;
+        }
+        prev->next = NULL;
+        
+        Node* RList = reverse(slow);
+        
+        slow = RList;
+        
+        while(temp!= NULL && RList!=NULL){
+            int x = temp->data;
+            temp->data = RList->data - temp->data;
+            RList->data = x;
+            temp = temp->next;
+            RList =  RList->next;
+        }
+        RList = reverse(slow);
+        prev->next = RList;
+        return head;
+    }
+};
