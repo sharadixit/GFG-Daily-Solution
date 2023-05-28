@@ -1,0 +1,49 @@
+class Solution{
+private:
+    string specialInorder(Node* root, unordered_map<string,int>& mp){
+        if(root==NULL)
+            return "";
+        
+        //left
+        string left="";
+        if(root->children.size()>0)
+            left='(' + specialInorder(root->children[0],mp) + ')';
+        
+        
+        //root
+        string dt = to_string(root->data);
+        
+        //right
+        int cnt=0;
+        string right="";
+        for(auto child : root->children){
+            if(cnt==0){
+                cnt++;
+                continue;
+            }
+            right='(' + specialInorder(child,mp) + ')';
+        }
+        
+        //storing the string
+        string finalString = left + dt + right;
+        mp[finalString]++;
+        
+        return finalString;  
+    }
+    
+public:
+    int duplicateSubtreeNaryTree(Node *root){
+        
+        unordered_map<string,int> mp;
+        
+        string temp = specialInorder(root,mp);
+        
+        int cnt=0;
+        for(auto x:mp){
+            if(x.second>1)
+                cnt++;
+        }
+        
+        return cnt;  
+    }
+};
