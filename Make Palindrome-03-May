@@ -1,0 +1,40 @@
+class Solution{
+public:
+   bool makePalindrome(int n,vector<string> &arr){
+        unordered_map<string, int>mp;
+        for(auto it : arr){
+            mp[it]++;
+        }
+        unordered_set<string>st;
+        for(auto it : mp){
+            string temp = it.first;
+            reverse(temp.begin(), temp.end());
+            if(!mp.count(temp)){
+               if(!(it.first == temp)) return false;
+               else{
+                   st.insert(it.first);
+                   if(st.size() > 1) return false;
+               }
+            }
+            else{
+                if(it.first == temp){
+                   st.insert(it.first);
+                   if(st.size() > 1) return false; 
+                }
+                else{
+                   if(it.second != mp[temp]){
+                        if(!(it.first == temp)) return false;
+                        else{
+                           st.insert(it.first);
+                           if(st.size() > 1) return false;
+                       }
+                    }
+                }
+            }
+        }
+        return true;
+        // Code here
+    }
+
+
+};
