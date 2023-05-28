@@ -1,0 +1,12 @@
+int getNthFromLast(Node *head, int n)
+    {
+        int cnt=0;
+           Node* l1=head;
+           while(l1){
+               cnt++;
+               l1=l1->next;
+           }
+           if(cnt<n) return -1;
+           for(int i=1;i<=cnt-n;i++) head=head->next;
+           return head->data;
+    }
