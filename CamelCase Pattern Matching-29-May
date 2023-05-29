@@ -1,0 +1,24 @@
+vector<string> CamelCase(int n, vector<string> dic, string ptrn) {
+        // code here
+        
+        map<string,vector<string>>v;
+        for(int i=0;i<n;++i){
+            string now;
+            for(int j=0;j<dic[i].size();++j){
+                if(dic[i][j]>='A' and dic[i][j]<='Z'){
+                    now+=dic[i][j];
+                    v[now].push_back(dic[i]);
+                }
+            }
+           
+        }
+        vector<string>ans;
+        for(int i=0;i<v[ptrn].size();++i){
+            ans.push_back(v[ptrn][i]);
+        }
+        
+        if(ans.size())
+            return ans;
+        return {"-1"};
+        
+    }
