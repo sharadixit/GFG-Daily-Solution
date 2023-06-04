@@ -1,0 +1,36 @@
+class Solution
+{
+    public:
+    int ans=1e9;
+    void traverse(Node* node,int K)
+    {
+        if(node==NULL) return;
+        
+        ans=min(ans,abs(node->data-K));
+        if(node->data==K)
+        {
+            ans=0;
+            return;
+        }
+        else if(node->data<K)
+        {
+            //go right side
+            traverse(node->right,K);
+            
+        }
+        
+        else if(node->data>K)
+        {
+            //go left side
+            traverse(node->left,K);
+        }
+        return;
+    }
+    //Function to find the least absolute difference between any node
+    //value of the BST and the given integer.
+    int minDiff(Node *root, int K)
+    {
+        traverse(root,K);
+        return ans;
+    }
+};
