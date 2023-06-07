@@ -1,0 +1,16 @@
+class Solution
+{
+public:
+    string kthPermutation(int n, int k)
+    {
+        string t= "";
+        for(int i=1;i<=n;i++){
+            t.push_back(to_string(i)[0]);
+        }
+        for(int i=1;i<k;i++){
+            next_permutation(t.begin(),t.end());
+        }
+        return t;
+    }
+};
+
