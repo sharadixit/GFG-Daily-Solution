@@ -1,0 +1,37 @@
+class Solution {
+  public:
+    string longestPalin (string s) {
+        int ma=INT_MIN;
+        string ans="";
+        for(int i=0;i<s.length()-1;i++)
+        {
+            int x=i,y=i+1;
+            while(x>=0 && y<s.length() && s[x]==s[y])
+            {
+                x--;
+                y++;
+            }
+            if(y-x-1>ma)
+            {
+                ma=y-x-1;
+                ans=s.substr(x+1,y-x-1);
+            }
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            int x=i-1,y=i+1;
+            while(x>=0 && y<s.length() && s[x]==s[y])
+            {
+                x--;
+                y++;
+            }
+            if(y-x-1>ma)
+            {
+                ma=y-x-1;
+                ans=s.substr(x+1,y-x-1);
+            }
+        }
+        return ans;
+        // code here
+    }
+};
