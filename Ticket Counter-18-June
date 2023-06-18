@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    int distributeTicket(int N, int k) {
+        // code here
+        list<int>l;
+        bool flag=1;
+        for(int i=1;i<=N;i++)l.push_back(i);
+        while(l.size()>k){
+            for(int i=1;i<=k;i++){
+                if(flag){
+                    l.pop_front();
+                }
+                else{
+                    l.pop_back();
+                }
+            }
+            flag=1-flag;
+        }
+        
+        return flag==1?l.back():l.front();
+    }
+};
